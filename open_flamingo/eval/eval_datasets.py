@@ -82,7 +82,7 @@ class VQADataset(Dataset):
             self.img_coco_split = self.image_dir_path.strip("/").split("/")[-1]
             assert self.img_coco_split in {"train2014", "val2014", "test2015"}
         if not self.is_train:
-            retrieval_path = "/data/ll/StyleCaption/style_clip/vqa/validation_sim_32.npy"
+            retrieval_path = "/data/ll/StyleCaption/style_clip/vqa/validation_SIIR_SQQR.npy"
             self.retrieval_set = np.load(retrieval_path, allow_pickle=True).item()
 
     def __len__(self):
