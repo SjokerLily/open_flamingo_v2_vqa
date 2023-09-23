@@ -7,7 +7,7 @@ import random
 import uuid
 from collections import defaultdict
 import sys
-sys.path.append("/data/ll/StyleCaption")
+sys.path.append("/data/ll/StyleCaption")  # where open_flamingo_v2_os is
 
 from einops import repeat
 import more_itertools
@@ -205,6 +205,11 @@ parser.add_argument(
 )
 parser.add_argument(
     "--vqav2_test_annotations_json_path",
+    type=str,
+    default=None,
+)
+parser.add_argument(
+    "--vqav2_retrieval_result_dir_path",
     type=str,
     default=None,
 )
@@ -565,6 +570,7 @@ def evaluate_vqa(
         test_image_dir_path = args.vqav2_test_image_dir_path
         test_questions_json_path = args.vqav2_test_questions_json_path
         test_annotations_json_path = args.vqav2_test_annotations_json_path
+        retrieval_path = args.vqav2_retrieval_result_dir_path
     elif dataset_name == "vizwiz":
         train_image_dir_path = args.vizwiz_train_image_dir_path
         train_questions_json_path = args.vizwiz_train_questions_json_path
@@ -631,6 +637,7 @@ def evaluate_vqa(
         annotations_path=test_annotations_json_path,
         is_train=False,
         dataset_name=dataset_name,
+        retrieval_path=retrieval_path,
     )
 
     test_dataloader = prepare_eval_samples(

@@ -18,6 +18,7 @@ python /data/ll/StyleCaption/open_flamingo_v2_os/open_flamingo/eval/evaluate.py 
     --vqav2_test_image_dir_path "/data/wyl/coco_data/val2014/" \
     --vqav2_test_questions_json_path "/data/share/pyz/data/vqav2/v2_OpenEnded_mscoco_val2014_questions.json" \
     --vqav2_test_annotations_json_path "/data/share/pyz/data/vqav2/v2_mscoco_val2014_annotations.json" \
+    --vqav2_retrieval_result_dir_path "/data/ll/StyleCaption/style_clip/vqa/validation_SIIR_SQQR.npy" \
     --results_file $RESULTS_FILE \
     --num_trials 1 \
     --seed 5 \

@@ -69,6 +69,7 @@ class CaptionDataset(Dataset):
 class VQADataset(Dataset):
     def __init__(
         self, image_dir_path, question_path, annotations_path, is_train, dataset_name,
+            retrieval_path=None,
     ):
         self.questions = json.load(open(question_path, "r"))["questions"]
         if annotations_path is not None:
@@ -82,8 +83,11 @@ class VQADataset(Dataset):
             self.img_coco_split = self.image_dir_path.strip("/").split("/")[-1]
             assert self.img_coco_split in {"train2014", "val2014", "test2015"}
         if not self.is_train:
-            retrieval_path = "/data/ll/StyleCaption/style_clip/vqa/validation_SIIR_SQQR.npy"
-            self.retrieval_set = np.load(retrieval_path, allow_pickle=True).item()
+            if retrieval_path != None:
+                self.retrieval_path = retrieval_path
+            else:
+                self.retrieval_path = "/data/ll/StyleCaption/style_clip/vqa/validation_SIIR_SQQR.npy"
+            self.retrieval_set = np.load(self.retrieval_path, allow_pickle=True).item()
 
     def __len__(self):
         return len(self.questions)
